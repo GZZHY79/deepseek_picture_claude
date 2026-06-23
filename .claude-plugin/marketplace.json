@@ -1,0 +1,16 @@
+{
+  "name": "read-image",
+  "owner": {
+    "name": "",
+    "email": "",
+    "url": "https://github.com"
+  },
+  "plugins": [
+    {
+      "name": "read-image",
+      "source": "./",
+      "description": "Read and describe local image files (PNG, JPG, GIF, WebP, BMP, TIFF) using a vision model. Supports OpenRouter, OpenAI, Ollama, and any OpenAI-compatible vision API.",
+      "version": "1.0.0"
+    }
+  ]
+}
