@@ -1,65 +1,65 @@
-# read-image — Vision Skill for Claude Code
+# read-image — Claude Code 视觉识别 Skill
 
-A Claude Code skill that lets Claude read and describe local image files. Works with any OpenAI-compatible vision API. Defaults to Zhipu GLM-4V-Flash (free), also supports OpenAI, OpenRouter, vLLM, etc.
+让 Claude Code 读取并描述本地图片文件。兼容任意 OpenAI 格式的视觉 API。默认使用智谱 GLM-4V-Flash（免费），也支持 OpenAI、OpenRouter、vLLM 等。
 
-- ⚡ **Lightweight** — one Python script, one dependency (`httpx`), nothing else
-- 🔌 **Easy install** — marketplace (two commands) or manual (one copy)
+- ⚡ **轻量** —— 一个 Python 脚本，一个依赖（`httpx`），再无其他
+- 🔌 **易装** —— marketplace 两行命令，或手动复制一次
 
-## Why?
+## 为什么需要这个？
 
-Claude Code's built-in `Read` tool refuses to send images to non-Anthropic API endpoints. If you use Claude Code with DeepSeek or any third-party LLM provider, reading images is broken — you just get `[Unsupported Image]`.
+Claude Code 内置的 `Read` 工具不会把图片发送给非 Anthropic 的 API。如果你用 DeepSeek 或其他第三方模型，读图功能直接挂掉——只返回 `[Unsupported Image]`。
 
-This skill bypasses the limitation by reading the image file directly and calling a vision model API, returning the text description to Claude.
+这个 skill 绕过这个限制：直接读取图片文件，调用视觉模型 API，把文字描述返回给 Claude。
 
-## How it works
+## 工作原理
 
 ```
-User: "What's in this chart?"  →  Skill triggers  →  Python script reads image
-                                                       ↓
-User sees text description     ←  Claude relays it  ←  Vision API returns text
+用户："这张图里有什么？"  →  Skill 触发  →  Python 脚本读取图片
+                                                 ↓
+用户看到文字描述          ←  Claude 转发   ←  视觉 API 返回结果
 ```
 
-## Installation & Configuration
+## 安装与配置
 
-Configuration is **required** — the skill won't work without an API key.
+配置是**必须的**——没有 API key 无法使用。
 
-### Step 1: Install
+### 第一步：安装
 
-**Marketplace (recommended):**
+**Marketplace 安装（推荐）：**
 ```bash
 claude plugin marketplace add https://github.com/GZZHY79/deepseek_picture_claude
 claude plugin install read-image
 ```
 
-**Manual:**
+**手动安装：**
 ```bash
 mkdir -p ~/.claude/skills/
 cp -r read-image ~/.claude/skills/
 pip install httpx
 ```
 
-### Step 2: Configure API key ⚠️ required
+### 第二步：配置 API key ⚠️ 必做
 
-Add to `~/.claude/settings.json` (or project `.claude/settings.json`):
+在 `~/.claude/settings.json`（或项目级 `.claude/settings.json`）中添加：
 
 ```json
 {
   "env": {
-    "VISION_API_KEY": "your-real-key-here",
+    "VISION_API_KEY": "换成你的真实key",
     "VISION_BASE_URL": "https://open.bigmodel.cn/api/paas/v4",
     "VISION_MODEL": "GLM-4V-Flash"
   }
 }
 ```
 
-Get a free key at [open.bigmodel.cn](https://open.bigmodel.cn/).
+免费 key 可在 [open.bigmodel.cn](https://open.bigmodel.cn/) 获取。
 
-### Other providers
+### 其他模型提供商
 
 <details>
-<summary>OpenRouter (free)</summary>
+<summary>OpenRouter（免费）</summary>
 
-Get a key at [openrouter.ai/keys](https://openrouter.ai/keys):
+在 [openrouter.ai/keys](https://openrouter.ai/keys) 获取 key：
 ```json
 {
   "env": {
@@ -86,37 +86,47 @@ Get a key at [openrouter.ai/keys](https://openrouter.ai/keys):
 </details>
 
 
-## Usage
+## 使用
 
-Once installed and configured, just ask Claude:
+安装配置完成后，直接对 Claude 说：
 
-> "Read this image: /path/to/screenshot.png"
+> "读一下这张图：/path/to/screenshot.png"
 >
-> "What does this chart show? ~/Downloads/results.png"
+> "这张图表显示了什么？ ~/Downloads/results.png"
 >
-> "Analyze this diagram: /tmp/architecture.jpg"
+> "分析这个架构图：/tmp/architecture.jpg"
 
-## Configuration reference
+## 配置参考
 
-| Variable | Default | Description |
+| 变量 | 默认值 | 说明 |
 |----------|---------|-------------|
-| `VISION_API_KEY` | *(required)* | API key for your vision provider |
-| `VISION_BASE_URL` | `https://open.bigmodel.cn/api/paas/v4` | OpenAI-compatible base URL |
-| `VISION_MODEL` | `GLM-4V-Flash` | Vision model name |
+| `VISION_API_KEY` | *(必填)* | 视觉模型提供商的 API key |
+| `VISION_BASE_URL` | `https://open.bigmodel.cn/api/paas/v4` | OpenAI 兼容的 API 地址 |
+| `VISION_MODEL` | `GLM-4V-Flash` | 视觉模型名称 |
 
-## Supported image formats
+## 支持的图片格式
 
-PNG, JPG/JPEG, GIF, WebP, BMP, TIFF.
+PNG、JPG/JPEG、GIF、WebP、BMP、TIFF。
 
-## Troubleshooting
+## 常见问题
 
-**`claude plugin marketplace add` hangs or times out:**
+**`claude plugin marketplace add` 卡住或超时：**
 ```bash
 CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS=600000 claude plugin marketplace add https://github.com/GZZHY79/deepseek_picture_claude
 ```
 
-**`VISION_API_KEY environment variable is required`:**
-Make sure you completed [Step 2](#step-2-configure-api-key-%EF%B8%8F-required) — add the `env` block to your `settings.json`.
+**提示 `VISION_API_KEY environment variable is required`：**
+确认已完成 [第二步](#第二步配置-api-key-️-必做)——在 `settings.json` 中正确添加了 `env` 块。
+
+## 同类项目对比
+
+| | read-image | xiincs/vision | deepseek-eyes | wnzmb/Skill | deecodex |
+|---|---|---|---|---|---|
+| 定位 | Claude Code skill | Claude Code skill | MCP Server | 通用模板 | Codex 代理 |
+| 配置 | settings.json | shell export | .env + settings | export | GUI |
+| 依赖 | 仅 httpx | 无 | venv + pip | 标准库 | 桌面应用 |
+| 提供商 | 任意兼容 | 3 家 | 1 家 | 任意兼容 | 6+ 家 |
+| 复杂度 | ★☆☆☆☆ | ★★☆☆☆ | ★★★☆☆ | ★★★☆☆ | ★★★★★ |
 
 ## License
 
