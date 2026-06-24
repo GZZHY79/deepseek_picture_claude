@@ -2,6 +2,9 @@
 
 A Claude Code skill that lets Claude read and describe local image files. Works with any OpenAI-compatible vision API. Defaults to Zhipu GLM-4V-Flash (free), also supports OpenAI, OpenRouter, vLLM, etc.
 
+- ⚡ **Lightweight** — one Python script, one dependency (`httpx`), nothing else
+- 🔌 **Easy install** — marketplace (two commands) or manual (one copy)
+
 ## Why?
 
 Claude Code's built-in `Read` tool refuses to send images to non-Anthropic API endpoints. If you use Claude Code with DeepSeek or any third-party LLM provider, reading images is broken — you just get `[Unsupported Image]`.

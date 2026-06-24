@@ -2,6 +2,9 @@
 
 让 Claude Code 读取并描述本地图片文件。兼容任意 OpenAI 格式的视觉 API。默认使用智谱 GLM-4V-Flash（免费），也支持 OpenAI、OpenRouter、vLLM 等。
 
+- ⚡ **轻量** —— 一个 Python 脚本，一个依赖（`httpx`），再无其他
+- 🔌 **易装** —— marketplace 两行命令，或手动复制一次
+
 ## 为什么需要这个？
 
 Claude Code 内置的 `Read` 工具不会把图片发送给非 Anthropic 的 API。如果你用 DeepSeek 或其他第三方模型，读图功能直接挂掉——只返回 `[Unsupported Image]`。
