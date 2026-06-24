@@ -52,7 +52,8 @@ Add to `~/.claude/settings.json` (or project `.claude/settings.json`):
 }
 ```
 
-Be careful about the "{}" position
+Be careful about the "{}" position.
+
 Get a free key at [open.bigmodel.cn/apikey/platform](https://open.bigmodel.cn/apikey/platform).
 
 ### Other providers
