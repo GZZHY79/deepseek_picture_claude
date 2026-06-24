@@ -30,6 +30,7 @@ claude plugin install read-image
 
 **Manual:**
 ```bash
+mkdir -p ~/.claude/skills/
 cp -r read-image ~/.claude/skills/
 pip install httpx
 ```
