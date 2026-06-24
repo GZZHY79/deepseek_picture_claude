@@ -7,7 +7,7 @@
 
 ## 为什么需要这个？
 
-Claude Code 内置的 `Read` 工具不会把图片发送给非 Anthropic 的 API。如果你用 DeepSeek 或其他第三方模型，读图功能直接挂掉——只返回 `[Unsupported Image]`。
+Claude Code 内置的 `Read` 工具不会把图片发送给非 Anthropic 的 API。如果你用 DeepSeek，GLM 或其他第三方模型，读图功能直接挂掉——只返回 `[Unsupported Image]`。
 
 这个 skill 绕过这个限制：直接读取图片文件，调用视觉模型 API，把文字描述返回给 Claude。
 

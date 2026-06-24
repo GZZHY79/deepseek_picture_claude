@@ -7,7 +7,7 @@ A Claude Code skill that lets Claude read and describe local image files. Works 
 
 ## Why?
 
-Claude Code's built-in `Read` tool refuses to send images to non-Anthropic API endpoints. If you use Claude Code with DeepSeek or any third-party LLM provider, reading images is broken — you just get `[Unsupported Image]`.
+Claude Code's built-in `Read` tool refuses to send images to non-Anthropic API endpoints. If you use Claude Code with DeepSeek, GLM or any third-party LLM provider, reading images is broken — you just get `[Unsupported Image]`.
 
 This skill bypasses the limitation by reading the image file directly and calling a vision model API, returning the text description to Claude.
 
