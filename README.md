@@ -36,49 +36,48 @@ pip install httpx
 
 ### Step 2: Configure API key ⚠️ required
 
-The skill ships with `scripts/.env` containing placeholders — you just need to edit it.
+Add to `~/.claude/settings.json` (or project `.claude/settings.json`):
 
-**Marketplace install:**
-
-```bash
-# open with your editor:
-vim <cache-path>/scripts/.env   # Typical location:~/.claude/plugins/marketplaces/read-image/scripts/.env
+```json
+{
+  "env": {
+    "VISION_API_KEY": "your-real-key-here",
+    "VISION_BASE_URL": "https://open.bigmodel.cn/api/paas/v4",
+    "VISION_MODEL": "GLM-4V-Flash"
+  }
+}
 ```
 
-**Manual install:**
-
-```bash
-vim ~/.claude/skills/read-image/scripts/.env
-```
-
-Replace the placeholder with your real key. Get a free one at [open.bigmodel.cn](https://open.bigmodel.cn/):
-
-```env
-VISION_API_KEY=your-real-key-here
-VISION_BASE_URL=https://open.bigmodel.cn/api/paas/v4
-VISION_MODEL=GLM-4V-Flash
-```
+Get a free key at [open.bigmodel.cn](https://open.bigmodel.cn/).
 
 ### Other providers
 
 <details>
 <summary>OpenRouter (free)</summary>
 
-Get a key at [openrouter.ai/keys](https://openrouter.ai/keys), then:
-```env
-VISION_API_KEY=sk-or-v1-...
-VISION_BASE_URL=https://openrouter.ai/api/v1
-VISION_MODEL=nvidia/nemotron-nano-12b-v2-vl:free
+Get a key at [openrouter.ai/keys](https://openrouter.ai/keys):
+```json
+{
+  "env": {
+    "VISION_API_KEY": "sk-or-v1-...",
+    "VISION_BASE_URL": "https://openrouter.ai/api/v1",
+    "VISION_MODEL": "nvidia/nemotron-nano-12b-v2-vl:free"
+  }
+}
 ```
 </details>
 
 <details>
 <summary>OpenAI</summary>
 
-```env
-VISION_API_KEY=sk-...
-VISION_BASE_URL=https://api.openai.com/v1
-VISION_MODEL=gpt-4o-mini
+```json
+{
+  "env": {
+    "VISION_API_KEY": "sk-...",
+    "VISION_BASE_URL": "https://api.openai.com/v1",
+    "VISION_MODEL": "gpt-4o-mini"
+  }
+}
 ```
 </details>
 
@@ -113,7 +112,7 @@ CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS=600000 claude plugin marketplace add https://g
 ```
 
 **`VISION_API_KEY environment variable is required`:**
-Make sure you completed [Step 2](#step-2-configure-api-key-%EF%B8%8F-required) — edit `scripts/.env` and replace the placeholder with your actual API key.
+Make sure you completed [Step 2](#step-2-configure-api-key-%EF%B8%8F-required) — add the `env` block to your `settings.json`.
 
 ## License
 

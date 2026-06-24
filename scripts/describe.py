@@ -1,13 +1,13 @@
 """Describe a local image file via an OpenAI-compatible vision model.
 
-Configuration via scripts/.env or environment variables:
+Configuration via environment variables (set in Claude Code settings.json `env` block,
+or export in terminal):
 
     VISION_API_KEY   — API key (required)
-    VISION_BASE_URL  — OpenAI-compatible API base URL (default: https://open.bigmodel.cn/api/paas/v4)
-    VISION_MODEL     — Vision-capable model name (default: GLM-4V-Flash)
+    VISION_BASE_URL  — API base URL (default: https://open.bigmodel.cn/api/paas/v4)
+    VISION_MODEL     — Model name (default: GLM-4V-Flash)
 
-Supports any provider with an /chat/completions endpoint that accepts
-image_url content blocks (OpenRouter, OpenAI, vLLM, etc.).
+Supports any OpenAI-compatible /chat/completions endpoint.
 """
 import base64
 import json
@@ -16,28 +16,6 @@ import sys
 from pathlib import Path
 
 import httpx
-
-# ── Load .env from script directory or user config (optional) ───────────
-def _load_dotenv():
-    """Load .env file without external dependencies."""
-    # Priority: scripts/.env > ~/.config/read-image/.env
-    candidates = [
-        Path(__file__).resolve().parent / ".env",
-        Path.home() / ".config" / "read-image" / ".env",
-    ]
-    for env_path in candidates:
-        if env_path.is_file():
-            with open(env_path, "r", encoding="utf-8") as f:
-                for line in f:
-                    line = line.strip()
-                    if not line or line.startswith("#") or "=" not in line:
-                        continue
-                    key, _, value = line.partition("=")
-                    key = key.strip()
-                    value = value.strip().strip("\"'")
-                    if key and key not in os.environ:
-                        os.environ[key] = value
-_load_dotenv()
 
 VISION_BASE_URL = os.getenv("VISION_BASE_URL", "https://open.bigmodel.cn/api/paas/v4")
 VISION_API_KEY = os.getenv("VISION_API_KEY", "")
@@ -136,7 +114,7 @@ def main():
             "\n"
             "Describe a local image file using a vision model.\n"
             "\n"
-            "Environment variables (also loaded from scripts/.env):\n"
+            "Environment variables:\n"
             "  VISION_API_KEY      API key (required)\n"
             "  VISION_BASE_URL     API base URL (default: Zhipu GLM-4V-Flash)\n"
             "  VISION_MODEL        Model name (default: GLM-4V-Flash)\n"

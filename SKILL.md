@@ -15,15 +15,19 @@ via any OpenAI-compatible `/chat/completions` endpoint (Zhipu GLM-4V-Flash by de
 
 ## Setup (required on first use)
 
-Set these environment variables before using the skill:
+Add to `~/.claude/settings.json`:
 
-```
-VISION_API_KEY=your-api-key       # required
-VISION_BASE_URL=...               # optional, defaults to Zhipu (GLM-4V-Flash)
-VISION_MODEL=...                  # optional, defaults to GLM-4V-Flash
+```json
+{
+  "env": {
+    "VISION_API_KEY": "your-api-key",
+    "VISION_BASE_URL": "https://open.bigmodel.cn/api/paas/v4",
+    "VISION_MODEL": "GLM-4V-Flash"
+  }
+}
 ```
 
-See [README.md](README.md) for detailed setup instructions and provider examples.
+See [README.md](README.md) for other providers (OpenAI, OpenRouter, etc.).
 
 ## Usage
 
