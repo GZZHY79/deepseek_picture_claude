@@ -22,7 +22,7 @@ User sees text description     ←  Claude relays it  ←  Vision API returns te
 
 ```bash
 # Add the marketplace
-claude marketplace add <github-user>/read-image
+claude marketplace add GZZHY79/deepseek_picture_claude
 
 # Enable the plugin
 claude plugins install read-image@read-image
@@ -33,7 +33,7 @@ Or in `settings.json`:
 {
   "extraKnownMarketplaces": {
     "read-image": {
-      "source": { "source": "github", "repo": "<github-user>/read-image" }
+      "source": { "source": "github", "repo": "GZZHY79/deepseek_picture_claude" }
     }
   },
   "enabledPlugins": {
