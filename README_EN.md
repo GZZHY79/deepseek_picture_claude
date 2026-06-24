@@ -121,3 +121,7 @@ Make sure you completed [Step 2](#step-2-configure-api-key-%EF%B8%8F-required) �
 ## License
 
 MIT
+
+---
+
+Issues and suggestions welcome — [open an issue](https://github.com/GZZHY79/deepseek_picture_claude/issues)，I will check as soon as possible.

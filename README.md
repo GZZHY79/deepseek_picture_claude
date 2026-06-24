@@ -118,16 +118,9 @@ CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS=600000 claude plugin marketplace add https://g
 **提示 `VISION_API_KEY environment variable is required`：**
 确认已完成 [第二步](#第二步配置-api-key-️-必做)——在 `settings.json` 中正确添加了 `env` 块。
 
-## 同类项目对比
-
-| | read-image | xiincs/vision | deepseek-eyes | wnzmb/Skill | deecodex |
-|---|---|---|---|---|---|
-| 定位 | Claude Code skill | Claude Code skill | MCP Server | 通用模板 | Codex 代理 |
-| 配置 | settings.json | shell export | .env + settings | export | GUI |
-| 依赖 | 仅 httpx | 无 | venv + pip | 标准库 | 桌面应用 |
-| 提供商 | 任意兼容 | 3 家 | 1 家 | 任意兼容 | 6+ 家 |
-| 复杂度 | ★☆☆☆☆ | ★★☆☆☆ | ★★★☆☆ | ★★★☆☆ | ★★★★★ |
-
 ## License
 
 MIT
+
+---
+ 欢迎大家使用和在[Issue](https://github.com/GZZHY79/deepseek_picture_claude/issues)提出建议，我会及时查看。
