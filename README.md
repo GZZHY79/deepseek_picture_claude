@@ -116,9 +116,6 @@ Once installed and configured, just ask Claude:
 | `VISION_API_KEY` | *(required)* | API key for your vision provider |
 | `VISION_BASE_URL` | `https://open.bigmodel.cn/api/paas/v4` | OpenAI-compatible base URL |
 | `VISION_MODEL` | `GLM-4V-Flash` | Vision model name |
-| `VISION_MAX_TOKENS` | `1024` | Max output tokens |
-| `VISION_AUTH_HEADER` | `Bearer` | Auth header prefix (`x-api-key` for DeepSeek) |
-| `VISION_EXTRA_BODY` | *(none)* | JSON object merged into request body |
 
 ## Supported image formats
 
