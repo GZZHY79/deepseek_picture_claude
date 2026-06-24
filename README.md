@@ -1,10 +1,10 @@
 # read-image — Vision Skill for Claude Code
 
-A Claude Code skill that lets Claude read and describe local image files. Works with any OpenAI-compatible vision API (OpenRouter, OpenAI, Ollama, vLLM, etc.).
+A Claude Code skill that lets Claude read and describe local image files. Works with any OpenAI-compatible vision API. Defaults to Zhipu GLM-4V-Flash (free), also supports OpenAI, OpenRouter, vLLM, etc.
 
 ## Why?
 
-Claude Code's built-in `Read` tool refuses to send images to non-Anthropic API endpoints. If you use Claude Code with DeepSeek, Ollama, or any third-party LLM provider, reading images is broken — you just get `[Unsupported Image]`.
+Claude Code's built-in `Read` tool refuses to send images to non-Anthropic API endpoints. If you use Claude Code with DeepSeek or any third-party LLM provider, reading images is broken — you just get `[Unsupported Image]`.
 
 This skill bypasses the limitation by reading the image file directly and calling a vision model API, returning the text description to Claude.
 
@@ -66,9 +66,9 @@ cp .env.example scripts/.env
 
 **`.env` file format:**
 ```env
-VISION_API_KEY=sk-or-v1-your-key-here
-VISION_MODEL=nvidia/nemotron-nano-12b-v2-vl:free
-# VISION_BASE_URL defaults to https://openrouter.ai/api/v1
+VISION_API_KEY=your-zhipu-api-key
+VISION_BASE_URL=https://open.bigmodel.cn/api/paas/v4
+VISION_MODEL=GLM-4V-Flash
 ```
 
 > **Where is `scripts/` after marketplace install?**
@@ -77,6 +77,13 @@ VISION_MODEL=nvidia/nemotron-nano-12b-v2-vl:free
 > **Manual install?** Just put `.env` next to `describe.py`.
 
 ### Provider examples
+
+**Zhipu GLM-4V-Flash (free, recommended):**
+```env
+VISION_API_KEY=your-key          # https://open.bigmodel.cn/ — API Keys
+VISION_BASE_URL=https://open.bigmodel.cn/api/paas/v4
+VISION_MODEL=GLM-4V-Flash
+```
 
 **OpenRouter (free, no credit card):**
 ```env
@@ -91,12 +98,6 @@ VISION_BASE_URL=https://api.openai.com/v1
 VISION_MODEL=gpt-4o-mini
 ```
 
-**Ollama (local):**
-```env
-VISION_BASE_URL=http://localhost:11434/v1
-VISION_MODEL=llava:latest
-VISION_API_KEY=ollama             # ignored, but required
-```
 
 ## Usage
 
@@ -113,8 +114,8 @@ Once installed and configured, just ask Claude:
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `VISION_API_KEY` | *(required)* | API key for your vision provider |
-| `VISION_BASE_URL` | `https://openrouter.ai/api/v1` | OpenAI-compatible base URL |
-| `VISION_MODEL` | `nvidia/nemotron-nano-12b-v2-vl:free` | Vision model name |
+| `VISION_BASE_URL` | `https://open.bigmodel.cn/api/paas/v4` | OpenAI-compatible base URL |
+| `VISION_MODEL` | `GLM-4V-Flash` | Vision model name |
 | `VISION_MAX_TOKENS` | `1024` | Max output tokens |
 | `VISION_AUTH_HEADER` | `Bearer` | Auth header prefix (`x-api-key` for DeepSeek) |
 | `VISION_EXTRA_BODY` | *(none)* | JSON object merged into request body |

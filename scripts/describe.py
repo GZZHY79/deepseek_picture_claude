@@ -8,7 +8,7 @@ Configuration via environment variables (see .env.example):
     VISION_MAX_TOKENS— Max output tokens (default: 1024)
 
 Supports any provider with an /chat/completions endpoint that accepts
-image_url content blocks (OpenRouter, OpenAI, Ollama, vLLM, etc.).
+image_url content blocks (OpenRouter, OpenAI, vLLM, etc.).
 """
 import base64
 import json
@@ -27,9 +27,9 @@ try:
 except ImportError:
     pass
 
-VISION_BASE_URL = os.getenv("VISION_BASE_URL", "https://openrouter.ai/api/v1")
+VISION_BASE_URL = os.getenv("VISION_BASE_URL", "https://open.bigmodel.cn/api/paas/v4")
 VISION_API_KEY = os.getenv("VISION_API_KEY", "")
-VISION_MODEL = os.getenv("VISION_MODEL", "nvidia/nemotron-nano-12b-v2-vl:free")
+VISION_MODEL = os.getenv("VISION_MODEL", "GLM-4V-Flash")
 VISION_MAX_TOKENS = int(os.getenv("VISION_MAX_TOKENS", "1024"))
 
 # Auth header format: "Bearer" for OpenAI/OpenRouter, "x-api-key" for DeepSeek, etc.

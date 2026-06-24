@@ -11,7 +11,7 @@ description: |
 # Read Image
 
 Use the bundled `scripts/describe.py` script to send a local image to a vision model
-(OpenRouter, OpenAI, Ollama, or any OpenAI-compatible `/chat/completions` endpoint).
+via any OpenAI-compatible `/chat/completions` endpoint (Zhipu GLM-4V-Flash by default, also supports OpenAI, OpenRouter, etc.).
 
 ## Setup (required on first use)
 
@@ -19,8 +19,8 @@ Set these environment variables before using the skill:
 
 ```
 VISION_API_KEY=your-api-key       # required
-VISION_BASE_URL=...               # optional, defaults to OpenRouter
-VISION_MODEL=...                  # optional, defaults to free model
+VISION_BASE_URL=...               # optional, defaults to Zhipu (GLM-4V-Flash)
+VISION_MODEL=...                  # optional, defaults to GLM-4V-Flash
 ```
 
 See [README.md](README.md) for detailed setup instructions and provider examples.
