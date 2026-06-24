@@ -11,6 +11,7 @@ Supports any provider with an /chat/completions endpoint that accepts
 image_url content blocks (OpenRouter, OpenAI, Ollama, vLLM, etc.).
 """
 import base64
+import json
 import os
 import sys
 from pathlib import Path
