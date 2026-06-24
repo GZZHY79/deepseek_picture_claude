@@ -52,7 +52,7 @@ pip install httpx
 }
 ```
 
-免费 key 可在 [open.bigmodel.cn](https://open.bigmodel.cn/) 获取。
+免费 key 可在 [open.bigmodel.cn/apikey/platform](https://open.bigmodel.cn/apikey/platform) 获取。
 
 ### 其他模型提供商
 

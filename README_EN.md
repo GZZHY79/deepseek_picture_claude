@@ -52,7 +52,7 @@ Add to `~/.claude/settings.json` (or project `.claude/settings.json`):
 }
 ```
 
-Get a free key at [open.bigmodel.cn](https://open.bigmodel.cn/).
+Get a free key at [open.bigmodel.cn/apikey/platform](https://open.bigmodel.cn/apikey/platform).
 
 ### Other providers
 
