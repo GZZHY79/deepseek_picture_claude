@@ -1,11 +1,10 @@
 """Describe a local image file via an OpenAI-compatible vision model.
 
-Configuration via environment variables (see .env.example):
+Configuration via scripts/.env or environment variables:
 
-    VISION_BASE_URL  — OpenAI-compatible API base URL (default: https://openrouter.ai/api/v1)
     VISION_API_KEY   — API key (required)
-    VISION_MODEL     — Vision-capable model name (default: nvidia/nemotron-nano-12b-v2-vl:free)
-    VISION_MAX_TOKENS— Max output tokens (default: 1024)
+    VISION_BASE_URL  — OpenAI-compatible API base URL (default: https://open.bigmodel.cn/api/paas/v4)
+    VISION_MODEL     — Vision-capable model name (default: GLM-4V-Flash)
 
 Supports any provider with an /chat/completions endpoint that accepts
 image_url content blocks (OpenRouter, OpenAI, vLLM, etc.).
@@ -18,14 +17,27 @@ from pathlib import Path
 
 import httpx
 
-# ── Load .env from script directory (optional) ────────────────────────────
-try:
-    from dotenv import load_dotenv
-    _env_path = Path(__file__).resolve().parent / ".env"
-    if _env_path.exists():
-        load_dotenv(_env_path)
-except ImportError:
-    pass
+# ── Load .env from script directory or user config (optional) ───────────
+def _load_dotenv():
+    """Load .env file without external dependencies."""
+    # Priority: scripts/.env > ~/.config/read-image/.env
+    candidates = [
+        Path(__file__).resolve().parent / ".env",
+        Path.home() / ".config" / "read-image" / ".env",
+    ]
+    for env_path in candidates:
+        if env_path.is_file():
+            with open(env_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line or line.startswith("#") or "=" not in line:
+                        continue
+                    key, _, value = line.partition("=")
+                    key = key.strip()
+                    value = value.strip().strip("\"'")
+                    if key and key not in os.environ:
+                        os.environ[key] = value
+_load_dotenv()
 
 VISION_BASE_URL = os.getenv("VISION_BASE_URL", "https://open.bigmodel.cn/api/paas/v4")
 VISION_API_KEY = os.getenv("VISION_API_KEY", "")
@@ -124,13 +136,10 @@ def main():
             "\n"
             "Describe a local image file using a vision model.\n"
             "\n"
-            "Environment variables:\n"
+            "Environment variables (also loaded from scripts/.env):\n"
             "  VISION_API_KEY      API key (required)\n"
-            "  VISION_BASE_URL     API base URL (default: OpenRouter)\n"
-            "  VISION_MODEL        Model name\n"
-            "  VISION_MAX_TOKENS   Max output tokens (default: 1024)\n"
-            "  VISION_AUTH_HEADER  Auth prefix (default: Bearer)\n"
-            "  VISION_EXTRA_BODY   JSON object merged into request body\n"
+            "  VISION_BASE_URL     API base URL (default: Zhipu GLM-4V-Flash)\n"
+            "  VISION_MODEL        Model name (default: GLM-4V-Flash)\n"
             "\n"
             "Examples:\n"
             "  python describe.py photo.jpg\n"

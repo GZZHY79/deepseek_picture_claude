@@ -1,0 +1,11 @@
+{
+  "name": "read-image",
+  "version": "1.0.0",
+  "description": "Read and describe local image files using a vision model. Defaults to Zhipu GLM-4V-Flash (free).",
+  "skills": [
+    {
+      "name": "read-image",
+      "path": "./SKILL.md"
+    }
+  ]
+}

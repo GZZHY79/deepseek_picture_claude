@@ -16,87 +16,71 @@ User: "What's in this chart?"  →  Skill triggers  →  Python script reads ima
 User sees text description     ←  Claude relays it  ←  Vision API returns text
 ```
 
-## Installation
+## Installation & Configuration
 
-### Option A: Install from Marketplace (recommended)
+Configuration is **required** — the skill won't work without an API key.
 
+### Step 1: Install
+
+**Marketplace (recommended):**
 ```bash
-# Add the marketplace
-claude marketplace add GZZHY79/deepseek_picture_claude
-
-# Enable the plugin
-claude plugins install read-image@read-image
+claude plugin marketplace add https://github.com/GZZHY79/deepseek_picture_claude
+claude plugin install read-image
 ```
 
-Or in `settings.json`:
-```json
-{
-  "extraKnownMarketplaces": {
-    "read-image": {
-      "source": { "source": "github", "repo": "GZZHY79/deepseek_picture_claude" }
-    }
-  },
-  "enabledPlugins": {
-    "read-image@read-image": true
-  }
-}
-```
-
-### Option B: Manual install
-
+**Manual:**
 ```bash
-# 1. Copy the skill into your user skills directory
 cp -r read-image ~/.claude/skills/
-
-# 2. Install dependencies
-pip install httpx python-dotenv
-
-# 3. Configure (see below)
+pip install httpx
 ```
 
-## Configuration
+### Step 2: Configure API key ⚠️ required
 
-Create a `.env` file in the skill's `scripts/` directory. The script auto-loads it on each run.
+The skill ships with `scripts/.env` containing placeholders — you just need to edit it.
 
-**Quick start — copy the template:**
+**Marketplace install:**
+
 ```bash
-cp .env.example scripts/.env
-# then edit scripts/.env with your keys
+# open with your editor:
+vim <cache-path>/scripts/.env   # Typical location:~/.claude/plugins/marketplaces/read-image/scripts/.env
 ```
 
-**`.env` file format:**
+**Manual install:**
+
+```bash
+vim ~/.claude/skills/read-image/scripts/.env
+```
+
+Replace the placeholder with your real key. Get a free one at [open.bigmodel.cn](https://open.bigmodel.cn/):
+
 ```env
-VISION_API_KEY=your-zhipu-api-key
+VISION_API_KEY=your-real-key-here
 VISION_BASE_URL=https://open.bigmodel.cn/api/paas/v4
 VISION_MODEL=GLM-4V-Flash
 ```
 
-> **Where is `scripts/` after marketplace install?**
-> Run `claude plugins list` to find the plugin cache path, then put `.env` in its `scripts/` folder.
->
-> **Manual install?** Just put `.env` next to `describe.py`.
+### Other providers
 
-### Provider examples
+<details>
+<summary>OpenRouter (free)</summary>
 
-**Zhipu GLM-4V-Flash (free, recommended):**
+Get a key at [openrouter.ai/keys](https://openrouter.ai/keys), then:
 ```env
-VISION_API_KEY=your-key          # https://open.bigmodel.cn/ — API Keys
-VISION_BASE_URL=https://open.bigmodel.cn/api/paas/v4
-VISION_MODEL=GLM-4V-Flash
-```
-
-**OpenRouter (free, no credit card):**
-```env
-VISION_API_KEY=sk-or-v1-...      # https://openrouter.ai/keys
+VISION_API_KEY=sk-or-v1-...
+VISION_BASE_URL=https://openrouter.ai/api/v1
 VISION_MODEL=nvidia/nemotron-nano-12b-v2-vl:free
 ```
+</details>
 
-**OpenAI:**
+<details>
+<summary>OpenAI</summary>
+
 ```env
 VISION_API_KEY=sk-...
 VISION_BASE_URL=https://api.openai.com/v1
 VISION_MODEL=gpt-4o-mini
 ```
+</details>
 
 
 ## Usage
@@ -120,6 +104,16 @@ Once installed and configured, just ask Claude:
 ## Supported image formats
 
 PNG, JPG/JPEG, GIF, WebP, BMP, TIFF.
+
+## Troubleshooting
+
+**`claude plugin marketplace add` hangs or times out:**
+```bash
+CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS=600000 claude plugin marketplace add https://github.com/GZZHY79/deepseek_picture_claude
+```
+
+**`VISION_API_KEY environment variable is required`:**
+Make sure you completed [Step 2](#step-2-configure-api-key-%EF%B8%8F-required) — edit `scripts/.env` and replace the placeholder with your actual API key.
 
 ## License
 
